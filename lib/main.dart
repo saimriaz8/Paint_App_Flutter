@@ -37,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<List<Offset>> allLines = [];
   List<Offset> currentLine = [];
-  List<Color> colors = [];
+  List<Color> listOfColors = [];
   List<double> listOfStrokeWidth = [];
   CrossFadeState shapeCrossFadeState = CrossFadeState.showFirst;
   CrossFadeState strokeCrossFadeState = CrossFadeState.showFirst;
@@ -244,6 +244,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void onPressedEraseAll() {
     setState(() {
       allLines = [];
+      listOfColors = [];
+      listOfStrokeWidth = [];
+      listOfAllShapes = [];
       isCustomPainterRebuild = true;
     });
   }
@@ -258,7 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void onPanStart(DragStartDetails details) {
     setState(() {
-      colors.add(selectedColor);
+      listOfColors.add(selectedColor);
       listOfStrokeWidth.add(strokeWidth);
       listOfAllShapes.add(currentShape);
       isCustomPainterRebuild = true;
@@ -334,7 +337,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               Text(
                                 'Draw',
                                 style: TextStyle(
-                                    fontSize: 9, fontWeight: FontWeight.w400, color: Colors.white),
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
                               )
                             ],
                           ),
@@ -360,15 +365,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                FontAwesomeIcons.eraser,
-                                size: 27,
-                                color: Colors.white
-                              ),
+                              Icon(FontAwesomeIcons.eraser,
+                                  size: 27, color: Colors.white),
                               Text(
                                 'Eraser',
                                 style: TextStyle(
-                                    fontSize: 9, fontWeight: FontWeight.w400, color: Colors.white),
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
                               )
                             ],
                           ),
@@ -382,15 +386,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.clear,
-                                size: 28,
-                                color: Colors.white
-                              ),
+                              Icon(Icons.clear, size: 28, color: Colors.white),
                               Text(
                                 'Erase All',
                                 style: TextStyle(
-                                    fontSize: 9, fontWeight: FontWeight.w400, color: Colors.white),
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white),
                               )
                             ],
                           ),
@@ -412,7 +414,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     allLines: allLines,
                     currentLine: currentLine,
                     color: selectedColor,
-                    allLineColors: colors,
+                    allLineColors: listOfColors,
                     listOfStrokeWidth: listOfStrokeWidth,
                     strokeWidth: strokeWidth,
                     currentShape: currentShape,

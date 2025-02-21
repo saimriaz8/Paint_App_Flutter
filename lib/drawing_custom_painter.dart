@@ -31,6 +31,9 @@ class DrawingCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Size(:width, :height) = size;
+     
+    // Clip the canvas to ensure no painting happens outside the designated area.
+    canvas.clipRect(Rect.fromLTWH(0, 0, width, height));
 
     // Paint
     Paint currentDrawingPaint = Paint()
@@ -75,7 +78,8 @@ class DrawingCustomPainter extends CustomPainter {
     }
 
     // Draw current shape when user draging finger
-    if (isCustomPainterRebuild && listOfListOffsetOfAllPreviousDrawing.isNotEmpty) {
+    if (isCustomPainterRebuild &&
+        listOfListOffsetOfAllPreviousDrawing.isNotEmpty) {
       Rect rect = Rect.fromPoints(onPanStartOffset, onPanEndOffset);
       if (shape == 'rectangle') {
         canvas.drawRect(rect, currentDrawingPaint);
